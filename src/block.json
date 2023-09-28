@@ -1,0 +1,58 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "willsides/icon-link",
+	"version": "0.1.0",
+	"title": "Icon Link",
+	"category": "design",
+	"icon": "links",
+	"description": "Displays an icon as a link",
+	"example": {},
+	"supports": {
+		"html": false,
+		"align": [ "left", "right", "center" ],
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true,
+			"link": true,
+			"gradients": false
+		},
+		"customClassName": true,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"attributes": {
+		"link": {
+			"type": "object",
+            "default": "none"
+		},
+		"size": {
+			"type": "integer",
+            "default": "100"
+		},
+		"align": {
+			"type": "string",
+			"default": "center"
+		},
+		"hoverOpacity": {
+		  "type": "integer",
+		  "default": "70"
+		},
+		"iconSlug": {
+		  "type": "string",
+		  "default": "favorite_border"
+		},
+		"isLink": {
+		  "type": "boolean",
+		  "default": "true"
+		}
+	},
+	"textdomain": "icon-link",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

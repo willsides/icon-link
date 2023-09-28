@@ -1,0 +1,71 @@
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-willsides-icon-link a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.wp-block-willsides-icon-link {
+  display: block;
+  width: 100%;
+}
+
+a.ws-hover-opacity-100:hover {
+  filter: opacity(1);
+}
+
+a.ws-hover-opacity-90:hover {
+  filter: opacity(0.9);
+}
+
+a.ws-hover-opacity-80:hover {
+  filter: opacity(0.8);
+}
+
+a.ws-hover-opacity-70:hover {
+  filter: opacity(0.7);
+}
+
+a.ws-hover-opacity-60:hover {
+  filter: opacity(0.6);
+}
+
+a.ws-hover-opacity-50:hover {
+  filter: opacity(0.5);
+}
+
+a.ws-hover-opacity-40:hover {
+  filter: opacity(0.4);
+}
+
+a.ws-hover-opacity-30:hover {
+  filter: opacity(0.3);
+}
+
+a.ws-hover-opacity-20:hover {
+  filter: opacity(0.2);
+}
+
+a.ws-hover-opacity-10:hover {
+  filter: opacity(0.1);
+}
+
+a.ws-hover-opacity-0:hover {
+  filter: opacity(0);
+}
+
+.wp-block-willsides-icon-link {
+  aspect-ratio: 1;
+}
+
+/*# sourceMappingURL=style-index.css.map*/
