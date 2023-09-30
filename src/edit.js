@@ -45,7 +45,8 @@ import './editor.scss';
 export default function Edit( { attributes, isSelected, setAttributes } ) {
 	const { 
 		link, 
-		size, 
+		size,
+		radius, 
 		hoverOpacity,
 		iconSlug,
 		isLink
@@ -130,6 +131,15 @@ export default function Edit( { attributes, isSelected, setAttributes } ) {
 					resetFallbackValue={100}
 				/>
 				<RangeControl
+					label="Radius Percent"
+					value={radius}
+					onChange={(value) => setAttributes({ radius: value })}
+					min={0}
+					max={100}
+					allowReset={true}
+					resetFallbackValue={0}
+				/>
+				<RangeControl
 					label="Hover Opacity %"
 					value={hoverOpacity}
 					onChange={(value) => setAttributes({ hoverOpacity: value })}
@@ -144,7 +154,7 @@ export default function Edit( { attributes, isSelected, setAttributes } ) {
 	)
 
 	return (
-		<div { ...useBlockProps() } style={{ height: `${size}px`, width: `${size}px` }} >
+		<div { ...useBlockProps() } style={{ height: `${size}px`, width: `${size}px`, borderRadius: `${radius*size/200}px` }} >
 			{ toolbarControls }
 			{ sidebarControls }
 			{ innerContent }

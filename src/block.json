@@ -33,6 +33,10 @@
 			"type": "integer",
             "default": "100"
 		},
+		"radius": {
+			"type": "integer",
+            "default": "0"
+		},
 		"align": {
 			"type": "string",
 			"default": "center"

@@ -62,6 +62,7 @@ function Edit({
   const {
     link,
     size,
+    radius,
     hoverOpacity,
     iconSlug,
     isLink
@@ -134,6 +135,16 @@ function Edit({
     allowReset: true,
     resetFallbackValue: 100
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: "Radius Percent",
+    value: radius,
+    onChange: value => setAttributes({
+      radius: value
+    }),
+    min: 0,
+    max: 100,
+    allowReset: true,
+    resetFallbackValue: 0
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     label: "Hover Opacity %",
     value: hoverOpacity,
     onChange: value => setAttributes({
@@ -149,7 +160,8 @@ function Edit({
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(),
     style: {
       height: `${size}px`,
-      width: `${size}px`
+      width: `${size}px`,
+      borderRadius: `${radius * size / 200}px`
     }
   }, toolbarControls, sidebarControls, innerContent);
 }
@@ -330,7 +342,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"willsides/icon-link","version":"0.1.0","title":"Icon Link","category":"design","icon":"links","description":"Displays an icon as a link","example":{},"supports":{"html":false,"align":["left","right","center"],"anchor":true,"color":{"background":true,"text":true,"link":true,"gradients":false},"customClassName":true,"spacing":{"margin":true,"padding":true}},"attributes":{"link":{"type":"object","default":"none"},"size":{"type":"integer","default":"100"},"align":{"type":"string","default":"center"},"hoverOpacity":{"type":"integer","default":"70"},"iconSlug":{"type":"string","default":"favorite_border"},"isLink":{"type":"boolean","default":"true"}},"textdomain":"icon-link","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"willsides/icon-link","version":"0.1.0","title":"Icon Link","category":"design","icon":"links","description":"Displays an icon as a link","example":{},"supports":{"html":false,"align":["left","right","center"],"anchor":true,"color":{"background":true,"text":true,"link":true,"gradients":false},"customClassName":true,"spacing":{"margin":true,"padding":true}},"attributes":{"link":{"type":"object","default":"none"},"size":{"type":"integer","default":"100"},"radius":{"type":"integer","default":"0"},"align":{"type":"string","default":"center"},"hoverOpacity":{"type":"integer","default":"70"},"iconSlug":{"type":"string","default":"favorite_border"},"isLink":{"type":"boolean","default":"true"}},"textdomain":"icon-link","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
