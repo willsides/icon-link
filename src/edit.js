@@ -59,7 +59,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		symopsz,
 		symStyle,
 		icnStyle,
-		fullSize
+		fullSize,
+		hoverText
 	} = attributes;
 
 	function updateLink(newLink) {
@@ -89,7 +90,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		isLink ? (
 		<a 
 			href={ link.url } 
-			title={`(Ctrl+Click to follow link)`}
+			title={`${hoverText} (Ctrl+Click to follow link)`}
 			target={ link.openInNewTab ? "_blank" : "_self" } 
 			rel={ link.openInNewTab ? "noopener noreferrer" : "noopener" }
 			class={`ws-hover-opacity-${hoverOpacity}`}
@@ -116,23 +117,6 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	let sidebarControls = (
 		<InspectorControls>
-			<PanelBody title="Link Settings" initialOpen={ true }>
-				<ToggleControl 
-					label="Link"
-					checked={isLink}
-					onChange={ () => setAttributes({ isLink: !isLink })}
-				/>
-				{ isLink ? 
-				<LinkControl
-					searchInputPlaceholder="Enter link URL..."
-					value={ link || "" } 
-					onChange={ ( newLink ) => {
-						updateLink(newLink); 
-					} }
-					showInitialSuggestions={false}
-				/> :
-				"" }
-			</PanelBody>
 			<PanelBody title="Icon Style" initialOpen={ true }>
 				<p>
 					<a href="https://fonts.google.com/icons?icon.set=Material+Symbols" 
@@ -220,6 +204,30 @@ export default function Edit( { attributes, setAttributes } ) {
 				/>
 				</div>
 				)}
+			</PanelBody>
+			<PanelBody title="Link Settings" initialOpen={ true }>
+				<ToggleControl 
+					label="Link"
+					checked={isLink}
+					onChange={ () => setAttributes({ isLink: !isLink })}
+				/>
+				{ isLink ? 
+				<div>
+					<LinkControl
+						searchInputPlaceholder="Enter link URL..."
+						value={ link || "" } 
+						onChange={ ( newLink ) => {
+							updateLink(newLink); 
+						} }
+						showInitialSuggestions={false}
+					/>
+					<TextControl
+						label="Hover text"
+						value={ hoverText }
+						onChange={ ( val ) => setAttributes( { hoverText: val } ) }
+					/>
+				</div> :
+				"" }
 			</PanelBody>
 			<PanelBody title="Display Settings">
 				<RangeControl

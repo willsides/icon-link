@@ -29,6 +29,10 @@
 			"type": "object",
             "default": "none"
 		},
+		"hoverText": {
+			"type": "string",
+            "default": ""
+		},
 		"size": {
 			"type": "integer",
             "default": 100

@@ -72,7 +72,8 @@ function Edit({
     symopsz,
     symStyle,
     icnStyle,
-    fullSize
+    fullSize,
+    hoverText
   } = attributes;
   function updateLink(newLink) {
     if (!newLink) return;
@@ -101,7 +102,7 @@ function Edit({
   }, iconSlug);
   let innerContent = isLink ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: link.url,
-    title: `(Ctrl+Click to follow link)`,
+    title: `${hoverText} (Ctrl+Click to follow link)`,
     target: link.openInNewTab ? "_blank" : "_self",
     rel: link.openInNewTab ? "noopener noreferrer" : "noopener",
     class: `ws-hover-opacity-${hoverOpacity}`,
@@ -115,22 +116,6 @@ function Edit({
     })
   })));
   let sidebarControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: "Link Settings",
-    initialOpen: true
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    label: "Link",
-    checked: isLink,
-    onChange: () => setAttributes({
-      isLink: !isLink
-    })
-  }), isLink ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalLinkControl, {
-    searchInputPlaceholder: "Enter link URL...",
-    value: link || "",
-    onChange: newLink => {
-      updateLink(newLink);
-    },
-    showInitialSuggestions: false
-  }) : ""), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: "Icon Style",
     initialOpen: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
@@ -247,6 +232,28 @@ function Edit({
       icnStyle: value
     })
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: "Link Settings",
+    initialOpen: true
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: "Link",
+    checked: isLink,
+    onChange: () => setAttributes({
+      isLink: !isLink
+    })
+  }), isLink ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalLinkControl, {
+    searchInputPlaceholder: "Enter link URL...",
+    value: link || "",
+    onChange: newLink => {
+      updateLink(newLink);
+    },
+    showInitialSuggestions: false
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: "Hover text",
+    value: hoverText,
+    onChange: val => setAttributes({
+      hoverText: val
+    })
+  })) : ""), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: "Display Settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     label: "Size",
@@ -386,10 +393,49 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @return {WPElement} Element to render.
  */
-function save() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
-  }, 'Icon Link – hello from the saved content!');
+function save({
+  attributes
+}) {
+  const {
+    link,
+    size,
+    radius,
+    hoverOpacity,
+    iconSlug,
+    isLink,
+    iconSet,
+    symFILL,
+    symwght,
+    symGRAD,
+    symopsz,
+    symStyle,
+    icnStyle,
+    fullSize,
+    hoverText
+  } = attributes;
+  let iconContent = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    class: `material-${iconSet}${iconSet == "symbols" ? "-" + symStyle : icnStyle == "filled" ? "" : "-" + icnStyle}`,
+    style: {
+      fontSize: `${fullSize ? size : size * 0.7071}px`,
+      fontVariationSettings: `'FILL' ${symFILL ? 1 : 0}, 'wght' ${symwght}, 'GRAD' ${symGRAD}, 'opsz' ${symopsz}`
+    }
+  }, iconSlug);
+  let innerContent = isLink ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: link.url,
+    title: hoverText,
+    target: link.openInNewTab ? "_blank" : "_self",
+    rel: link.openInNewTab ? "noopener noreferrer" : "noopener",
+    class: `ws-hover-opacity-${hoverOpacity}`
+  }, iconContent) : iconContent;
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ...blockProps,
+    style: {
+      height: `${size}px`,
+      width: `${size}px`,
+      borderRadius: `${radius * size / 200}px`
+    }
+  }, innerContent);
 }
 
 /***/ }),
@@ -474,7 +520,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"willsides/icon-link","version":"0.1.0","title":"Icon Link","category":"design","icon":"links","description":"Displays an icon as a link","example":{},"supports":{"html":false,"align":["left","right","center"],"anchor":true,"color":{"background":true,"text":true,"link":true,"gradients":false},"customClassName":true,"spacing":{"margin":true,"padding":true}},"attributes":{"link":{"type":"object","default":"none"},"size":{"type":"integer","default":100},"radius":{"type":"integer","default":0},"align":{"type":"string","default":"center"},"hoverOpacity":{"type":"integer","default":70},"iconSlug":{"type":"string","default":"favorite_border"},"isLink":{"type":"boolean","default":true},"iconSet":{"type":"string","default":"symbols","enum":["symbols","icons"]},"symFILL":{"type":"boolean","default":false},"symwght":{"type":"integer","default":400,"enum":[100,200,300,400,500,600,700]},"symGRAD":{"type":"integer","default":0},"symopsz":{"type":"integer","default":24},"symStyle":{"type":"string","default":"sharp","enum":["sharp","outlined","rounded"]},"icnStyle":{"type":"string","default":"sharp","enum":["outlined","filled","round","sharp","two-tone"]},"fullSize":{"type":"boolean","default":"true"}},"textdomain":"icon-link","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"willsides/icon-link","version":"0.1.0","title":"Icon Link","category":"design","icon":"links","description":"Displays an icon as a link","example":{},"supports":{"html":false,"align":["left","right","center"],"anchor":true,"color":{"background":true,"text":true,"link":true,"gradients":false},"customClassName":true,"spacing":{"margin":true,"padding":true}},"attributes":{"link":{"type":"object","default":"none"},"hoverText":{"type":"string","default":""},"size":{"type":"integer","default":100},"radius":{"type":"integer","default":0},"align":{"type":"string","default":"center"},"hoverOpacity":{"type":"integer","default":70},"iconSlug":{"type":"string","default":"favorite_border"},"isLink":{"type":"boolean","default":true},"iconSet":{"type":"string","default":"symbols","enum":["symbols","icons"]},"symFILL":{"type":"boolean","default":false},"symwght":{"type":"integer","default":400,"enum":[100,200,300,400,500,600,700]},"symGRAD":{"type":"integer","default":0},"symopsz":{"type":"integer","default":24},"symStyle":{"type":"string","default":"sharp","enum":["sharp","outlined","rounded"]},"icnStyle":{"type":"string","default":"sharp","enum":["outlined","filled","round","sharp","two-tone"]},"fullSize":{"type":"boolean","default":"true"}},"textdomain":"icon-link","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
