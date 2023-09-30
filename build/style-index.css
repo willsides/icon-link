@@ -66,6 +66,9 @@ a.ws-hover-opacity-0:hover {
 
 .wp-block-willsides-icon-link {
   aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=style-index.css.map*/
