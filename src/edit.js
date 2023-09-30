@@ -23,7 +23,9 @@ import {
 	ToolbarGroup,
 	TextControl,
 	ToggleControl,
-	PanelBody
+	SelectControl,
+	PanelBody,
+	Tooltip
 } from '@wordpress/components';
 
 /**
@@ -42,14 +44,22 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit( { attributes, isSelected, setAttributes } ) {
+export default function Edit( { attributes, setAttributes } ) {
 	const { 
 		link, 
 		size,
 		radius, 
 		hoverOpacity,
 		iconSlug,
-		isLink
+		isLink,
+		iconSet,
+		symFILL,
+		symwght,
+		symGRAD,
+		symopsz,
+		symStyle,
+		icnStyle,
+		fullSize
 	} = attributes;
 
 	function updateLink(newLink) {
@@ -66,8 +76,11 @@ export default function Edit( { attributes, isSelected, setAttributes } ) {
 
 	let iconContent = (
 		<span
-			class="material-symbols-sharp"
-			style={{ fontSize: `${size}px` }}>
+			class={`material-${iconSet}${iconSet=="symbols"?"-"+symStyle:icnStyle=="filled"?"":"-"+icnStyle}`}
+			style={{ 
+				fontSize: `${fullSize?size:size*0.7071}px`,
+				fontVariationSettings: `'FILL' ${symFILL?1:0}, 'wght' ${symwght}, 'GRAD' ${symGRAD}, 'opsz' ${symopsz}`,
+			}}>
 			{ iconSlug }
 		</span>
 	)
@@ -120,6 +133,87 @@ export default function Edit( { attributes, isSelected, setAttributes } ) {
 				/> :
 				"" }
 			</PanelBody>
+			<PanelBody title="Icon Style" initialOpen={ true }>
+				<TextControl
+					label="Icon or symbol slug"
+					value={ iconSlug }
+					onChange={ ( val ) => setAttributes( { iconSlug: val } ) }
+				/>
+				<SelectControl
+					value={ iconSet }
+					options={ [
+						{ label: 'Symbols', value: 'symbols' },
+						{ label: 'Icons', value: 'icons' },
+					] }
+					onChange={(value) => setAttributes({ iconSet: value })}
+				/>
+				{ (iconSet=="symbols") ?
+				(
+				<div>
+					<SelectControl
+						value={ symStyle }
+						options={ [
+							{ label: 'Sharp', value: 'sharp' },
+							{ label: 'Outlined', value: 'outlined' },
+							{ label: 'Rounded', value: 'rounded' },
+						] }
+						onChange={(value) => setAttributes({ symStyle: value })}
+					/>
+					<ToggleControl 
+						label="Fill"
+						checked={symFILL}
+						onChange={ () => setAttributes({ symFILL: !symFILL })}
+					/>
+					<RangeControl
+						label="Weight"
+						value={symwght}
+						onChange={(value) => setAttributes({ symwght: value })}
+						min={100}
+						max={700}
+						step={100}
+						marks={[
+							{value:100, label:'100'},
+							{value:200, label:'200'},
+							{value:300, label:'300'},
+							{value:400, label:'400'},
+							{value:500, label:'500'},
+							{value:600, label:'600'},
+							{value:700, label:'700'},
+						]} 
+					/>
+					<RangeControl
+						label="Grade"
+						value={symGRAD}
+						onChange={(value) => setAttributes({ symGRAD: value })}
+						min={-50}
+						max={200}
+						step={1}
+					/>
+					<RangeControl
+						label="Optical Size"
+						value={symopsz}
+						onChange={(value) => setAttributes({ symopsz: value })}
+						min={20}
+						max={48}
+						step={1}
+					/>
+				</div>
+				) : (
+				<div>
+					<SelectControl
+						value={ icnStyle }
+						options={ [
+							{ label: 'Outlined', value: 'outlined' },
+							{ label: 'Filled', value: 'filled' },
+							{ label: 'Rounded', value: 'round' },
+							{ label: 'Sharp', value: 'sharp' },
+							{ label: 'Two-Tone', value: 'two-tone' },
+						] }
+						onChange={(value) => setAttributes({ icnStyle: value })}
+				/>
+				</div>
+				)}
+			</PanelBody>
 			<PanelBody title="Display Settings">
 				<RangeControl
 					label="Size"
@@ -139,6 +233,15 @@ export default function Edit( { attributes, isSelected, setAttributes } ) {
 					allowReset={true}
 					resetFallbackValue={0}
 				/>
+				<Tooltip text="Shrink the icon to guarantee it will fit entirely within a circular background">
+					<div>
+						<ToggleControl
+							label="Full Size Icon"
+							checked={fullSize}
+							onChange={ () => setAttributes({ fullSize: !fullSize })}
+						/>
+					</div>
+				</Tooltip>
 				<RangeControl
 					label="Hover Opacity %"
 					value={hoverOpacity}

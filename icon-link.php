@@ -28,6 +28,15 @@ add_action( 'init', 'willsides_icon_link_block_init' );
 
 function willsides_icon_link_enqueue_styles() {
     wp_enqueue_style( 'material_symbols_sharp', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200', array(), null );
+    wp_enqueue_style( 'material_symbols_outlined', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200', array(), null );
+    wp_enqueue_style( 'material_symbols_rounded', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200', array(), null );
+    wp_enqueue_style( 'material_icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), null );
+    wp_enqueue_style( 'material_icons-outlined', 'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined', array(), null );
+    wp_enqueue_style( 'material_icons-two-tone', 'https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone', array(), null );
+    wp_enqueue_style( 'material_icons-round', 'https://fonts.googleapis.com/icon?family=Material+Icons+Round', array(), null );
+    wp_enqueue_style( 'material_icons-sharp', 'https://fonts.googleapis.com/icon?family=Material+Icons+Sharp', array(), null );
 }
 add_action( 'wp_enqueue_scripts', 'willsides_icon_link_enqueue_styles' );
-add_action( 'enqueue_block_editor_assets', 'willsides_icon_link_enqueue_styles' );
+if ( is_admin() ) {
+    add_action( 'enqueue_block_editor_assets', 'willsides_icon_link_enqueue_styles' );
+}

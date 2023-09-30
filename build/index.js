@@ -56,7 +56,6 @@ __webpack_require__.r(__webpack_exports__);
  */
 function Edit({
   attributes,
-  isSelected,
   setAttributes
 }) {
   const {
@@ -65,7 +64,15 @@ function Edit({
     radius,
     hoverOpacity,
     iconSlug,
-    isLink
+    isLink,
+    iconSet,
+    symFILL,
+    symwght,
+    symGRAD,
+    symopsz,
+    symStyle,
+    icnStyle,
+    fullSize
   } = attributes;
   function updateLink(newLink) {
     if (!newLink) return;
@@ -86,9 +93,10 @@ function Edit({
     }
   };
   let iconContent = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    class: "material-symbols-sharp",
+    class: `material-${iconSet}${iconSet == "symbols" ? "-" + symStyle : icnStyle == "filled" ? "" : "-" + icnStyle}`,
     style: {
-      fontSize: `${size}px`
+      fontSize: `${fullSize ? size : size * 0.7071}px`,
+      fontVariationSettings: `'FILL' ${symFILL ? 1 : 0}, 'wght' ${symwght}, 'GRAD' ${symGRAD}, 'opsz' ${symopsz}`
     }
   }, iconSlug);
   let innerContent = isLink ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
@@ -123,6 +131,118 @@ function Edit({
     },
     showInitialSuggestions: false
   }) : ""), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: "Icon Style",
+    initialOpen: true
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: "Icon or symbol slug",
+    value: iconSlug,
+    onChange: val => setAttributes({
+      iconSlug: val
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    value: iconSet,
+    options: [{
+      label: 'Symbols',
+      value: 'symbols'
+    }, {
+      label: 'Icons',
+      value: 'icons'
+    }],
+    onChange: value => setAttributes({
+      iconSet: value
+    })
+  }), iconSet == "symbols" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    value: symStyle,
+    options: [{
+      label: 'Sharp',
+      value: 'sharp'
+    }, {
+      label: 'Outlined',
+      value: 'outlined'
+    }, {
+      label: 'Rounded',
+      value: 'rounded'
+    }],
+    onChange: value => setAttributes({
+      symStyle: value
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: "Fill",
+    checked: symFILL,
+    onChange: () => setAttributes({
+      symFILL: !symFILL
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: "Weight",
+    value: symwght,
+    onChange: value => setAttributes({
+      symwght: value
+    }),
+    min: 100,
+    max: 700,
+    step: 100,
+    marks: [{
+      value: 100,
+      label: '100'
+    }, {
+      value: 200,
+      label: '200'
+    }, {
+      value: 300,
+      label: '300'
+    }, {
+      value: 400,
+      label: '400'
+    }, {
+      value: 500,
+      label: '500'
+    }, {
+      value: 600,
+      label: '600'
+    }, {
+      value: 700,
+      label: '700'
+    }]
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: "Grade",
+    value: symGRAD,
+    onChange: value => setAttributes({
+      symGRAD: value
+    }),
+    min: -50,
+    max: 200,
+    step: 1
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: "Optical Size",
+    value: symopsz,
+    onChange: value => setAttributes({
+      symopsz: value
+    }),
+    min: 20,
+    max: 48,
+    step: 1
+  })) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    value: icnStyle,
+    options: [{
+      label: 'Outlined',
+      value: 'outlined'
+    }, {
+      label: 'Filled',
+      value: 'filled'
+    }, {
+      label: 'Rounded',
+      value: 'round'
+    }, {
+      label: 'Sharp',
+      value: 'sharp'
+    }, {
+      label: 'Two-Tone',
+      value: 'two-tone'
+    }],
+    onChange: value => setAttributes({
+      icnStyle: value
+    })
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: "Display Settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     label: "Size",
@@ -144,7 +264,15 @@ function Edit({
     max: 100,
     allowReset: true,
     resetFallbackValue: 0
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Tooltip, {
+    text: "Shrink the icon to guarantee it will fit entirely within a circular background"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: "Full Size Icon",
+    checked: fullSize,
+    onChange: () => setAttributes({
+      fullSize: !fullSize
+    })
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     label: "Hover Opacity %",
     value: hoverOpacity,
     onChange: value => setAttributes({
@@ -342,7 +470,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"willsides/icon-link","version":"0.1.0","title":"Icon Link","category":"design","icon":"links","description":"Displays an icon as a link","example":{},"supports":{"html":false,"align":["left","right","center"],"anchor":true,"color":{"background":true,"text":true,"link":true,"gradients":false},"customClassName":true,"spacing":{"margin":true,"padding":true}},"attributes":{"link":{"type":"object","default":"none"},"size":{"type":"integer","default":"100"},"radius":{"type":"integer","default":"0"},"align":{"type":"string","default":"center"},"hoverOpacity":{"type":"integer","default":"70"},"iconSlug":{"type":"string","default":"favorite_border"},"isLink":{"type":"boolean","default":"true"}},"textdomain":"icon-link","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"willsides/icon-link","version":"0.1.0","title":"Icon Link","category":"design","icon":"links","description":"Displays an icon as a link","example":{},"supports":{"html":false,"align":["left","right","center"],"anchor":true,"color":{"background":true,"text":true,"link":true,"gradients":false},"customClassName":true,"spacing":{"margin":true,"padding":true}},"attributes":{"link":{"type":"object","default":"none"},"size":{"type":"integer","default":100},"radius":{"type":"integer","default":0},"align":{"type":"string","default":"center"},"hoverOpacity":{"type":"integer","default":70},"iconSlug":{"type":"string","default":"favorite_border"},"isLink":{"type":"boolean","default":true},"iconSet":{"type":"string","default":"symbols","enum":["symbols","icons"]},"symFILL":{"type":"boolean","default":false},"symwght":{"type":"integer","default":400,"enum":[100,200,300,400,500,600,700]},"symGRAD":{"type":"integer","default":0},"symopsz":{"type":"integer","default":24},"symStyle":{"type":"string","default":"sharp","enum":["sharp","outlined","rounded"]},"icnStyle":{"type":"string","default":"sharp","enum":["outlined","filled","round","sharp","two-tone"]},"fullSize":{"type":"boolean","default":"true"}},"textdomain":"icon-link","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
