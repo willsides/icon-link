@@ -133,7 +133,11 @@ function Edit({
   }) : ""), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: "Icon Style",
     initialOpen: true
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "https://fonts.google.com/icons?icon.set=Material+Symbols",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, "Available icons and style info")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
     label: "Icon or symbol slug",
     value: iconSlug,
     onChange: val => setAttributes({

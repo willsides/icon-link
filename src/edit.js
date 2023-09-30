@@ -134,6 +134,13 @@ export default function Edit( { attributes, setAttributes } ) {
 				"" }
 			</PanelBody>
 			<PanelBody title="Icon Style" initialOpen={ true }>
+				<p>
+					<a href="https://fonts.google.com/icons?icon.set=Material+Symbols" 
+						target="_blank" 
+						rel="noopener noreferrer">
+						Available icons and style info
+					</a>
+				</p>
 				<TextControl
 					label="Icon or symbol slug"
 					value={ iconSlug }
