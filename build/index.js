@@ -97,7 +97,7 @@ function Edit({
     class: `material-${iconSet}${iconSet == "symbols" ? "-" + symStyle : icnStyle == "filled" ? "" : "-" + icnStyle}`,
     style: {
       fontSize: `${fullSize ? size : size * 0.7071}px`,
-      fontVariationSettings: `'FILL' ${symFILL ? 1 : 0}, 'wght' ${symwght}, 'GRAD' ${symGRAD}, 'opsz' ${symopsz}`
+      fontVariationSettings: `"FILL" ${symFILL ? 1 : 0}, "wght" ${symwght}, "GRAD" ${symGRAD}, "opsz" ${symopsz}`
     }
   }, iconSlug);
   let innerContent = isLink ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
@@ -417,7 +417,7 @@ function save({
     class: `material-${iconSet}${iconSet == "symbols" ? "-" + symStyle : icnStyle == "filled" ? "" : "-" + icnStyle}`,
     style: {
       fontSize: `${fullSize ? size : size * 0.7071}px`,
-      fontVariationSettings: `'FILL' ${symFILL ? 1 : 0}, 'wght' ${symwght}, 'GRAD' ${symGRAD}, 'opsz' ${symopsz}`
+      fontVariationSettings: `"FILL" ${symFILL ? 1 : 0}, "wght" ${symwght}, "GRAD" ${symGRAD}, "opsz" ${symopsz}`
     }
   }, iconSlug);
   let innerContent = isLink ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
